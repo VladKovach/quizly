@@ -83,6 +83,12 @@ class QuizCreateSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        get_video_transcript(validated_data.get("url"))
+        transcript = get_video_transcript(validated_data.get("url"))
+
+        if transcript is None:
+            raise serializers.ValidationError(
+                {"url": "No transcript available for this video."}
+            )
+
         validated_data.pop("url")
         return super().create(validated_data)
