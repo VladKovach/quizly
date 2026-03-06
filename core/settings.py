@@ -31,19 +31,20 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "http://127.0.0.1:3000",
-#     "http://localhost:4200",
-#     "http://your-frontend.com",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "http://your-frontend.com",
+]
 
-
+CORS_ALLOW_CREDENTIALS = True
 # Put BEFORE CommonMiddleware, but AFTER SecurityMiddleware
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://yourdomain.com",
-    "https://your-frontend-domain.com",
+    "http://localhost:8000",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "http://127.0.0.1:8000",
 ]
 # Application definition
 
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
+    "corsheaders",
     # ---------- apps --------
     "auth_app",
     "quiz_app",
@@ -65,7 +67,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    # "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -148,6 +150,12 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "user": "100/day",  # change to 10 on prod
+    },
 }
 
 
