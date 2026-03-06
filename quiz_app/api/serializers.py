@@ -57,6 +57,8 @@ class QuizCreateSerializer(serializers.ModelSerializer):
     QuizCreateSerializer description
     """
 
+    # renew = serializers.BooleanField(write_only=True, required=False, default=False)
+
     url = serializers.URLField(write_only=True)
     questions = QuestionExtendedSerializer(many=True, read_only=True)
 
@@ -104,16 +106,31 @@ class QuizCreateSerializer(serializers.ModelSerializer):
         validated_data["description"] = quizze_data["description"]
         validated_data["video_url"] = validated_data["url"]
         validated_data.pop("url")
+        # validated_data.pop("renew", None)
 
         # create quiz
-        quiz = Quiz.objects.create(validated_data)
+        quiz = Quiz.objects.create(**validated_data)
         # create questions
         for q in quizze_data["questions"]:
-            question_data = {
-                "question_title": q.question_title,
-                "question_options": q.answer_options,
-                "answer": q.answer,
-            }
-            Question.objects.create(**question_data, quiz=quiz)
+            Question.objects.create(
+                question_title=q["question_title"],
+                question_options=q["answer_options"],
+                answer=q["answer"],
+                quiz=quiz,
+            )
 
         return quiz
+
+
+class QuizDetailSerializer(QuizSerializer):
+    title = serializers.CharField(max_length=120, min_length=15)
+    description = serializers.CharField(max_length=300, min_length=50)
+
+    class Meta(QuizSerializer.Meta):
+        fields = QuizSerializer.Meta.fields
+        read_only_fields = [
+            "created_at",
+            "updated_at",
+            "video_url",
+            "questions",
+        ]

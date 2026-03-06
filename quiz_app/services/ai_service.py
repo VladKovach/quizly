@@ -26,14 +26,20 @@ def generate_quizzes(transcript: str):
     4. The "answer" field must be the index (0, 1, 2, or 3) of the correct option in "answer_options".
     5. Questions must be based strictly on the transcript content — no outside knowledge.
     6. Questions should vary in difficulty and cover different parts of the transcript.
+    7. Exectly numbers of questions - 10.
     7. Avoid trivial or repeated questions.
     8. "title" must be a short headline summarizing the transcript (max 100 characters).
-    9. "description" must be a short summary of the transcript content (max 400 characters). Write it as a direct summary of the topic, not as a description about what TRANSCRIPT is, only summary info
-
+    9. "description" must be a short summary of the transcript content (max 300 characters). Write it as a direct summary of the topic, not as a description about what TRANSCRIPT is, only summary info
+    10. NEVER reference "the transcript", "the video", "the speaker", "the author" in any question or answer option.
+    11. Write questions as direct knowledge questions — as if from a textbook or exam.
+        - BAD:  "What does the transcript say about X?"
+        - BAD:  "According to the video, what is X?"
+        - GOOD: "What is the correct way to handle X?"
+        - GOOD: "Which of the following best describes X?"
     REQUIRED JSON FORMAT:
     {{
     "title": "Short headline about the transcript topic",
-    "description": "A brief summary of what the transcript is about, max 400 characters.",
+    "description": "A brief summary of what the transcript is about, max 300 characters.",
     "questions": [
         {{
         "question_title": "The question text here?",
