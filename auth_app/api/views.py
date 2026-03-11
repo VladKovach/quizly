@@ -11,9 +11,12 @@ from .serializers import RegistrationSerializer
 
 
 class RegistrationView(APIView):
+    """User registration endpoint"""
+
     permission_classes = [AllowAny]
 
     def post(self, request):
+        """Handle user registration, set JWT tokens in cookies on success"""
         serializer = RegistrationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()  # Returns the created user from create()
@@ -47,9 +50,12 @@ class RegistrationView(APIView):
 
 
 class LoginView(APIView):
+    """User login endpoint, set JWT tokens in cookies on success"""
+
     permission_classes = [AllowAny]
 
     def post(self, request):
+        """Handle user login"""
         username = request.data.get("username")
         password = request.data.get("password")
 
@@ -74,7 +80,6 @@ class LoginView(APIView):
                 }
             )
 
-            # Access token (short-lived)
             response.set_cookie(
                 key="access_token",
                 value=str(refresh.access_token),
@@ -84,7 +89,6 @@ class LoginView(APIView):
                 max_age=30 * 60,  # 30 min
             )
 
-            # Refresh token (long-lived)
             response.set_cookie(
                 key="refresh_token",
                 value=str(refresh),

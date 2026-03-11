@@ -86,6 +86,7 @@ class QuizCreateSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
+        """Create quiz, get transcript, generate questions using AI, and save to DB"""
         # get transcript
         transcript = get_video_transcript(validated_data.get("url"))
         if transcript is None:
@@ -124,6 +125,8 @@ class QuizCreateSerializer(serializers.ModelSerializer):
 
 
 class QuizDetailSerializer(QuizSerializer):
+    """QuizDetailSerializer description"""
+
     title = serializers.CharField(max_length=120, min_length=15)
     description = serializers.CharField(max_length=300, min_length=25)
 

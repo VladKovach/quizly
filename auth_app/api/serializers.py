@@ -32,5 +32,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
+        """Remove confirmed_password from validated_data and create user"""
         validated_data.pop("confirmed_password")
         return User.objects.create_user(**validated_data)
