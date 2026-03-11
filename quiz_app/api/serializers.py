@@ -102,6 +102,7 @@ class QuizCreateSerializer(serializers.ModelSerializer):
 
         # provide validated data
         quizze_data = parse_ai_responce(ai_response)
+        print("quizze_data = ", quizze_data)
         validated_data["title"] = quizze_data["title"]
         validated_data["description"] = quizze_data["description"]
         validated_data["video_url"] = validated_data["url"]

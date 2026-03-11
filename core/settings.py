@@ -156,6 +156,7 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {
         "user": "100/day",  # change to 10 on prod
     },
+    "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
 
 
