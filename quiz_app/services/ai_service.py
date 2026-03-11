@@ -23,7 +23,7 @@ def generate_quizzes(transcript: str):
     1. Respond ONLY in the same language as the transcript. Do NOT translate.
     2. Return ONLY a valid raw JSON object. No markdown, no code blocks, no explanation — just the JSON.
     3. Each question must have exactly 4 answer options.
-    4. The "answer" field must be the index (0, 1, 2, or 3) of the correct option in "answer_options".
+    4. The "answer" field is a correct option and must be exactly one the options in "answer_options".
     5. Questions must be based strictly on the transcript content — no outside knowledge.
     6. Questions should vary in difficulty and cover different parts of the transcript.
     7. Exectly numbers of questions - 10.
@@ -44,7 +44,7 @@ def generate_quizzes(transcript: str):
         {{
         "question_title": "The question text here?",
         "answer_options": ["Option A", "Option B", "Option C", "Option D"],
-        "answer": 0
+        "answer": "Option A"
         }}
     ]
     }}

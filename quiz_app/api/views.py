@@ -16,7 +16,8 @@ from quiz_app.models import Quiz
 
 
 class QuizListCreateView(ListCreateAPIView):
-    queryset = Quiz.objects.all()
+    def get_queryset(self):
+        return Quiz.objects.filter(user=self.request.user)
 
     def get_serializer_class(self):
         if self.request.method == "POST":
