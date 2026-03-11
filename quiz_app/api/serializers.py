@@ -125,7 +125,7 @@ class QuizCreateSerializer(serializers.ModelSerializer):
 
 class QuizDetailSerializer(QuizSerializer):
     title = serializers.CharField(max_length=120, min_length=15)
-    description = serializers.CharField(max_length=300, min_length=50)
+    description = serializers.CharField(max_length=300, min_length=25)
 
     class Meta(QuizSerializer.Meta):
         fields = QuizSerializer.Meta.fields
