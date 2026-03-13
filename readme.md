@@ -12,7 +12,7 @@ A Django REST Framework backend that converts YouTube videos into quiz sets, wit
 
 ## 📦 Tech stack
 
-- Python 3.8+
+- Python 3.8+ [Download Python](https://www.python.org/downloads/)
 - Django 6.0
 - Django REST Framework
 - djangorestframework-simplejwt
@@ -24,73 +24,95 @@ A Django REST Framework backend that converts YouTube videos into quiz sets, wit
 - GEMINI_API_KEY — required to call Google Gemini AI API
 - .env is loaded automatically by python-dotenv
 
-## 🛠 Setup
+## 🚀 Installation & Setup
 
-1. Clone repository
+### Step 1: Clone the Repository
 
-`ash
-git clone <your-repo-url> quizly
-cd quizly
-`
+```bash
+git clone https://github.com/VladKovach/quizly.git
+cd Coderr
+```
 
-2. Create virtual env and activate
+### Step 2: Create and Activate a Virtual Environment
 
-Windows (PowerShell):
-`powershell
+#### On Windows (PowerShell):
+
+```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-`
+```
 
-Windows (CMD):
-`cmd
+#### On Windows (Command Prompt):
+
+```cmd
 python -m venv .venv
 .venv\Scripts\activate.bat
-`
+```
 
-Linux/macOS:
-`ash
+#### On macOS/Linux:
+
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
-`
+```
 
-3. Install dependencies
+### Step 3: Install Dependencies
 
-`ash
+```bash
 pip install -r requirements.txt
-`
+```
 
-4. Create .env and set key
+Verify installation:
 
-`ash
-copy .env.template .env
-`
+```bash
+pip list
+```
 
-Add:
+### Step 4: Environment Setup
 
-`ini
-GEMINI_API_KEY=your_gemini_api_key
-`
+#### Copy .env
 
-5. Apply migrations
+```
+cp .env.template .env
+```
 
-`ash
+### Step 5: Database Setup
+
+#### Apply Migrations
+
+Create the database tables and apply all migrations:
+
+```bash
+# Create any pending migrations
 python manage.py makemigrations
+
+# Apply migrations to the database
 python manage.py migrate
-`
+```
 
-6. Create superuser
+### Step 6: Create a Superuser (Admin)
 
-`ash
+Create an admin account to access the Django admin panel:
+
+```bash
 python manage.py createsuperuser
-`
+```
 
-7. Run server
+Follow the prompts to enter:
 
-`ash
+- Username
+- Email
+- Password
+
+### Step 7: Running the Application 🏃
+
+#### Start the Development Server
+
+```bash
 python manage.py runserver
-`
+```
 
-Default: http://127.0.0.1:8000/
+The server will run at: **http://127.0.0.1:8000/**
 
 ## 🌐 API Endpoints
 
@@ -124,36 +146,17 @@ All auth endpoints use cookies:
 
 PUT/PATCH/DELETE are guarded by IsQuizCreator and IsAuthenticated.
 
-## 🧩 Data models
-
-### Quiz
-
-- user (FK to User)
-- title
-- description
-- video_url
-- created_at, updated_at
-- related questions
-
-### Question
-
-- quiz (FK)
-- question_title
-- question_options (JSON array of 4 items)
-- answer
-- created_at, updated_at
-
 ## 🤖 AI flow
 
 1. video_url -> get_video_transcript (from YouTube transcript API)
-2. transcript -> generate_quizzes with Gemini (prompt enforces strict JSON output)
-3. response parsed by parse_ai_responce and saved as Quiz + Question set
+2. transcript -> generate_quizzes with Gemini
+3. response parsed and saved as Quiz + Question set
 
 ## 🧪 Tests
 
-`ash
+```bash
 pytest
-`
+```
 
 ## 📘 Admin
 
