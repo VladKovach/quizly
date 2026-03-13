@@ -21,8 +21,7 @@ A Django REST Framework backend that converts YouTube videos into quiz sets, wit
 
 ## 🔑 Required env vars
 
-- GEMINI_API_KEY — required to call Google Gemini AI API
-- .env is loaded automatically by python-dotenv
+- GEMINI_API_KEY — required to call Google Gemini AI API (https://www.youtube.com/watch?v=Uyn-P2nRvDA)
 
 ## 🚀 Installation & Setup
 
@@ -74,6 +73,12 @@ pip list
 
 ```
 cp .env.template .env
+```
+
+Then open `.env` and add your Gemini API key:
+
+```
+GEMINI_API_KEY=your-api-key-here
 ```
 
 ### Step 5: Database Setup
