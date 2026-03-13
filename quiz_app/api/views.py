@@ -31,18 +31,14 @@ class QuizListCreateView(ListCreateAPIView):
     def create(self, request, *args, **kwargs):
         """Override create to check for existing quiz with same video URL before creating a new one"""
         url = request.data.get("url")
-        # renew = request.data.get("renew", False)
 
         existing_quiz = Quiz.objects.filter(
             video_url=url, user=request.user
         ).first()
 
         if existing_quiz:
-            # if not renew: ich werde das nach der Abgabe implementieren
             serializer = QuizSerializer(existing_quiz)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        # else:
-        #     existing_quiz.delete()
 
         return super().create(request, *args, **kwargs)
 
