@@ -29,7 +29,7 @@ A Django REST Framework backend that converts YouTube videos into quiz sets, wit
 
 ```bash
 git clone https://github.com/VladKovach/quizly.git
-cd Coderr
+cd quizly
 ```
 
 ### Step 2: Create and Activate a Virtual Environment
