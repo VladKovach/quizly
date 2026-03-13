@@ -5,6 +5,8 @@ User = get_user_model()
 
 
 class UserFactory(factory.django.DjangoModelFactory):
+    """Factory for creating User instances."""
+
     class Meta:
         model = User
 

@@ -1,8 +1,9 @@
 from rest_framework import serializers
 
 from quiz_app.models import Question, Quiz
-from quiz_app.services.ai_service import generate_quizzes, parse_ai_responce
+from quiz_app.services.ai_service import generate_quizzes
 from quiz_app.services.video_to_text import get_video_transcript
+from quiz_app.utils import parse_ai_response
 
 
 class QuestionBaseSerializer(serializers.ModelSerializer):
@@ -102,7 +103,7 @@ class QuizCreateSerializer(serializers.ModelSerializer):
             )
 
         # provide validated data
-        quizze_data = parse_ai_responce(ai_response)
+        quizze_data = parse_ai_response(ai_response)
         print("quizze_data = ", quizze_data)
         validated_data["title"] = quizze_data["title"]
         validated_data["description"] = quizze_data["description"]

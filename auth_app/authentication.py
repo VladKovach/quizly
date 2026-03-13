@@ -3,6 +3,8 @@ from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 
 
 class CookieJWTAuthentication(JWTAuthentication):
+    """Custom authentication class to read JWT from cookies."""
+
     def authenticate(self, request):
         raw_token = request.COOKIES.get("access_token")
         if not raw_token:
